@@ -1,8 +1,5 @@
 package com.javagame.engine;
 
-import java.sql.Time;
-import java.util.ArrayList;
-
 public class Engine {
     
     static final double GAME_FPS = 60.0;
@@ -32,10 +29,9 @@ public class Engine {
             while (delta >= frameGapLength) {
                 delta -= frameGapLength;
                 scene.update();
+                gameScreen.draw();
             }
         }
-    }
-    
-    
+    } 
     
 }
