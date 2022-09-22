@@ -16,9 +16,12 @@ public class GameScreen extends JPanel {
 
     private class DrawObject{
         public Position pos;
-        public Image sprite;
+        public Sprite sprite;
+        public DrawObject(Position pos, Sprite sprite) {
+            this.pos = pos;
+            this.sprite = sprite;
+        }
     }
-
 
     private final JFrame frame;
     public GameScreen(){
@@ -32,19 +35,30 @@ public class GameScreen extends JPanel {
         drawBuffer = new ArrayList<>();
     }
 
-    public void draw(){
+    public void update(){
         repaint();
     }
 
+    public void draw(Position pos, Sprite sprite) {
+        drawBuffer.add(new DrawObject(pos, sprite));
+        
+    }
+
     @Override
-    public void paintComponent(Graphics go) {
-        super.paintComponent(go);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         Toolkit.getDefaultToolkit().sync();
 
-        Graphics2D g = (Graphics2D)go;
+        drawBuffer((Graphics2D)g);
 
-        g.fillRect(100, 100, UNIT * SCALE, UNIT * SCALE);
+    }
 
+    private void drawBuffer(Graphics2D g){
+        for (var drawObject : drawBuffer) {
+            g.drawImage(drawObject.sprite.getImage(), drawObject.pos.x, drawObject.pos.y, this); 
+            
+        }
+        drawBuffer.clear();
     }
 
 }

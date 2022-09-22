@@ -1,21 +1,23 @@
 package com.javagame.components;
 
 import com.javagame.engine.Component;
+import com.javagame.game.Game;
 import com.javagame.engine.*;
 import java.awt.*;
 
 public class SpriteRenderer extends Component {
     
-    private Image sprite;
+    private Sprite sprite;
 
-    public SpriteRenderer(GameObject owner, Image sprite) {
+    public SpriteRenderer(GameObject owner, String path) {
         super(owner);
-        this.sprite = sprite;
+        this.sprite = new Sprite(path);
     }
 
     @Override
     public void update() {
         
+        Game.engine.gameScreen.draw(owner.transform.position, sprite);
     }
     
 }

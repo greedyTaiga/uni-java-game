@@ -1,11 +1,17 @@
 package com.javagame.engine;
 
 import java.util.ArrayList;
+import com.javagame.components.Transform;
 
-public abstract class GameObject {
+public class GameObject {
     public final ArrayList<Component> components;
-    public GameObject(ArrayList<Component> components) {
-        this.components = components;
+    public final Transform transform;
+
+    public GameObject() {
+        transform = new Transform(this);
+
+        this.components = new ArrayList<>();
+        components.add(transform);
     }
     
     public void addComponent(Component component) {
@@ -24,7 +30,9 @@ public abstract class GameObject {
         }
     }
     public void updateComponents(){
+        
         for(var component : components) {
+            
             component.update();
         }
     }

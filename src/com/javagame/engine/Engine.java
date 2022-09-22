@@ -4,7 +4,7 @@ public class Engine {
     
     static final double GAME_FPS = 60.0;
     
-    final GameScreen gameScreen;
+    public final GameScreen gameScreen;
     
     public Engine(){
         gameScreen = new GameScreen();
@@ -14,7 +14,7 @@ public class Engine {
         runScene(scene);
     }
     
-    private void runScene(Scene scene){
+    public void runScene(Scene scene){
         scene.initialize();
         
         var lastTime = System.nanoTime();
@@ -29,7 +29,7 @@ public class Engine {
             while (delta >= frameGapLength) {
                 delta -= frameGapLength;
                 scene.update();
-                gameScreen.draw();
+                gameScreen.update();
             }
         }
     } 

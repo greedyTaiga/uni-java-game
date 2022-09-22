@@ -2,7 +2,7 @@ package com.javagame.engine;
 
 public abstract class Component {
     
-    private final GameObject owner;
+    protected final GameObject owner;
     public Component(GameObject owner) {
         this.owner = owner;
     }
