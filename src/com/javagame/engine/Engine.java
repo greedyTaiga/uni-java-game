@@ -5,9 +5,11 @@ public class Engine {
     static final double GAME_FPS = 60.0;
     
     public final GameScreen gameScreen;
+    public final Input input;
     
     public Engine(){
         gameScreen = new GameScreen();
+        input = new Input(gameScreen);
     }
     
     public void StartGame(Scene scene) {
