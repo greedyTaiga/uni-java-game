@@ -2,6 +2,7 @@ package com.javagame.components;
 
 import com.javagame.engine.Component;
 import com.javagame.engine.GameObject;
+import com.javagame.game.*;
 
 public class Mover extends Component {
 
@@ -11,7 +12,17 @@ public class Mover extends Component {
 
     @Override
     public void update(){
-        owner.transform.position.x += 1;
+        
+        int x = 0, y = 0;
+        if(Game.engine.input.GetKey("W")) y --;
+        if(Game.engine.input.GetKey("S")) y ++;
+        if(Game.engine.input.GetKey("D")) x ++;
+        if(Game.engine.input.GetKey("A")) x --;
+
+        owner.transform.position.x += x;
+        owner.transform.position.y += y;
+        
+        
     }
     
 }

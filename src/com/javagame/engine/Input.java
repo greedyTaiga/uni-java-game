@@ -13,13 +13,18 @@ import com.javagame.game.*;
 public class Input {
 
 
-    public final HashMap<String, Boolean> keyPressed;
+    private final HashMap<String, Boolean> keyPressed;
     final JPanel panel;
     
     public Input(JPanel panel){
         this.panel = panel;
         keyPressed = new HashMap<>();
         Setup();
+    }
+
+    public Boolean GetKey(String key) {
+        if (keyPressed.get(key) == null) return false;
+        return keyPressed.get(key);
     }
 
     private void Setup(){
@@ -48,23 +53,27 @@ public class Input {
         actionMap.put("R_A", new InputAction("R_A"));
 
         //right
-        inputMap.put(KeyStroke.getKeyStroke("A"), "A");
-        inputMap.put(KeyStroke.getKeyStroke("released A"), "R_A");
+        inputMap.put(KeyStroke.getKeyStroke("D"), "D");
+        inputMap.put(KeyStroke.getKeyStroke("released D"), "R_D");
 
-        actionMap.put("A", new InputAction("A"));
-        actionMap.put("R_A", new InputAction("R_A"));
+        actionMap.put("D", new InputAction("D"));
+        actionMap.put("R_D", new InputAction("R_D"));
 
     }
 
     private class InputAction extends AbstractAction{
         
-        final String action;
+        final String key;
+        final Boolean keyPressedState;
         public InputAction(String action) {
-            this.action = action;
+            this.keyPressedState = !(action.charAt(0) == 'R');
+
+            if (this.keyPressedState) this.key = action;
+            else this.key = action.substring(2);
         }
 
         public void actionPerformed(ActionEvent e) {
-            System.out.println(action + " happened");
+            keyPressed.put(key, keyPressedState);
         }
     }
 
